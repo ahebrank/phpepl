@@ -10,13 +10,7 @@ var
                   window.location.origin :
                   window.location.origin + ':' + port,
 
-    // Evals for different environments
-    unsafe    = origin + '/src/eval/unsafe.php',
-    sandboxed = origin + '/src/eval/index.php',
-
-    // Safeguard to always use the live eval on the remote server
-    // and the unsafe dev version otherwise.
-    evalURL        = isLiveEnv() ? sandboxed : unsafe,
+    evalURL        = origin + '/src/eval/index.php',
 
     mixpanel       = window.mixpanel || {},
     editor         = require('./editor'),
@@ -82,7 +76,6 @@ function processResponse(res) {
 
   if (!error) {
     editorHelpers.setOutput(result);
-
   } else {
     if (error.line && error.message) {
       // Show the line in red
